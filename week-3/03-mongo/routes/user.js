@@ -120,7 +120,7 @@ try {
 
     res.status(200).json({userCourseList})
 
-}git 
+}
 catch(error){
     console.error(error)
     res.status(500).json({

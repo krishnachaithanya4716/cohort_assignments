@@ -1,6 +1,26 @@
 function userMiddleware(req, res, next) {
-    // Implement user auth logic
-    // You need to check the headers and validate the user from the user DB. Check readme for the exact headers to be expected
+
+    try {
+   const token = req.headers['Authorization']
+
+   const verifiedToken = jwt.verify(token,jwtPassword)
+
+   if (verifiedToken){
+    next();
+   }
+   else{
+    res.status(404).json({
+        message:"Invalid credentials"
+    })
+    return;
+   }
+}
+catch(error){
+    console.error(error)
+    res.status(500).json({
+        message:"Internal error"
+    })
+}
 }
 
 module.exports = userMiddleware;
